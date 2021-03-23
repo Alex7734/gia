@@ -1,0 +1,130 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+    <title>Produse - GIA</title>
+
+    <style>
+        body{
+            background-color: antiquewhite;
+        }
+
+        .swiper-container{
+            height: 40em;
+        }
+
+        .flexDisplay{
+            display: flex;
+            height: 90%;
+            width: 100%;
+        }
+
+        .image{
+            background-color: chartreuse;
+            height: 100%;
+            width: 50%;
+        }
+
+        .paragraf{
+            background-color: darkblue;
+            height: 100%;
+            width: 50%;
+        }
+
+        .boxContainer{
+            width: auto;
+            overflow: hidden;
+            background-color: aquamarine;
+            display: flex;
+            justify-content: space-evenly;
+            flex-flow: wrap;
+        }
+
+        .boxContainer div{
+            background-color: brown;
+            height: 15em;
+            width: 15em;
+            margin: .5em;
+        }
+    </style>
+
+
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="slideAnexe">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide flexDisplay">
+                  <div class="image"></div>
+                  <div class="paragraf"></div>
+              </div>
+              <div class="swiper-slide flexDisplay">
+                <div class="image"></div>
+                <div class="paragraf"></div>
+              </div>
+              <div class="swiper-slide flexDisplay">
+                <div class="image"></div>
+                <div class="paragraf"></div>
+              </div>
+              <div class="swiper-slide flexDisplay">
+                <div class="image"></div>
+                <div class="paragraf"></div>
+              </div>
+              <div class="swiper-slide flexDisplay">
+                <div class="image"></div>
+                <div class="paragraf"></div>
+              </div>
+              <div class="swiper-slide flexDisplay">
+                <div class="image"></div>
+                <div class="paragraf"></div>
+              </div>
+              <div class="swiper-slide flexDisplay">
+                <div class="image"></div>
+                <div class="paragraf"></div>
+              </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination counter"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+    </div>
+
+    <div class="boxContainer">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'fraction',
+
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+    </script>
+
+</body>
+</html>
