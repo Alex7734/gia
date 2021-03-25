@@ -23,12 +23,16 @@ def about(request, *args, **kwargs):
 
 def produse(request, *args, **kwargs):
     context = {}
+    produse = Produs.objects.filter(active=True, featured=True)
     context['page'] = 'produse'
+    context['produse'] = produse
     return render(request, 'produse.html', context)
 
 def anexe(request, *args, **kwargs):
     context = {}
+    anexe =  Anexa.objects.filter(active=True)
     context['page'] = 'anexe'
+    context['anexe'] = anexe
     return render(request, 'anexe.html', context)
 
 def sendEmail(request):
@@ -45,7 +49,7 @@ def sendEmail(request):
             request.POST['subject'],
             template,
             settings.EMAIL_HOST_USER,
-            ['alexmihoc@yahoo.com']
+            ['alexmihoc@yahoo.com', 'octaczo22@gmail.com']
         )
 
         email.fail_silently = False

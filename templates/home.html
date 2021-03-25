@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
     <title>GIA</title>
+
 </head>
 <body>
 
@@ -75,7 +76,7 @@
 		                	<div class="content-nume">
 		                    	<h1>{{produs.name}}</h1>
 		                	</div>
-		                    <div class="content content1">
+		                    <div class="content">
 		                        <div>
 		                            <p>{{produs.small_body}}</p>
 		                        </div>
@@ -113,21 +114,21 @@
             <h1 class="">Contact</h1>
             <div class="social">
                 <h2>Ia legatura prin retelele de socializare</h2>
-                <p><a href="https://www.youtube.com/channel/UC7EUpwSsqXJqHz2FR98Slsg/featured">Utilaje Agricole Sighisoara</a></p>
-                <p><a href="https://www.facebook.com/GIA-SRL-Incarcatoare-Frontale-Pentru-Tractoare-465689154207247">GIA SRL Incarcatoare Frontale Pentru Tractoare</a></p>
+                <p>YouTube: <a href="https://www.youtube.com/channel/UC7EUpwSsqXJqHz2FR98Slsg/featured">Utilaje Agricole Sighisoara</a></p>
+                <p>Facebook: <a href="https://www.facebook.com/GIA-SRL-Incarcatoare-Frontale-Pentru-Tractoare-465689154207247">GIA SRL Incarcatoare Frontale Pentru Tractoare</a></p>
             </div>
             <div class="other">
                 <h2>Ia legatura prin alte modalitati</h2>
                 <div class="textTip">
                     <p id="number1" onclick="copyText('0743327564')", onmouseout="changeText()">
                         <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-                        07...
+                        0743327564
                     </p>
                 </div>
                 <div class="textTip">
                     <p id="number1" onclick="copyText('transportgia@gmail.com')", onmouseout="changeText()">
                         <span class="tooltiptext" id="myTooltip2">Copy to clipboard</span>
-                        transport...
+                        transportgia@gmail.com
                     </p>
                 </div>
             </div>
@@ -135,7 +136,7 @@
                 <h2>Ia legatura fizic cu noi</h2>
                 <div class="container">
                     <div class="text">
-                        <p>strada n...</p>
+                        <p>Strada Garii nr.43</p>
                     </div>
                     <div class="map">
                         
@@ -149,7 +150,8 @@
 
         <div class="write">
             <h1>Scrie-ne</h1>
-            <form method="post" action="contact.php" id="contactform">
+            <form method="post" action="{% url 'send-email' %}" id="contactform">
+                {% csrf_token %}
                 <div class="form">
                     <input type="text" name="name" placeholder="Numele complet*">
                     <input type="text" name="subject" placeholder="Subiectul discutiei *">
@@ -196,6 +198,25 @@
             },
         });
 
+        swiper.longSwipes = false;
+
+        var onEdge=false;
+        var lastPosition=0;
+
+        swiper.on('progress', function () {
+            if (swiper.isBeginning && (swiper.progress<lastPosition)){
+                swiper.allowTouchMove = false;
+            } else if (swiper.isEnd && (swiper.progress>lastPosition)){
+                swiper.allowTouchMove = false;
+            }
+            lastPosition=swiper.progress;
+        });
+
+
+        swiper.on('touchStart', function () {
+            swiper.allowTouchMove = true
+        });
+
         function copyText(text) {
             // const str = document.getElementById('item-to-copy').innerText
             const el = document.createElement('textarea')
@@ -235,7 +256,6 @@
         }
 
     </script>
-
 
     <style>
         
@@ -434,55 +454,79 @@
             border-radius: 5%;
             margin: auto;
             width: 50%;
+            height: 4em;
         }
 
         .incarcator h1{
+            position: relative;
+            height: auto;
             text-align: center;
+            width: 100%;
+            margin: 0;
         }
 
         .incarcator .content{
             margin-top: 2em;
-            width: 80%;
+            width: 100%;
+            max-width: 90%;
             height: auto;
             margin-left: auto;
             margin-right: auto;
 
             display: flex;
             flex-direction: row;
-            justify-content: space-around;
+            /* justify-content: space-around; */
         }
 
         .incarcator .content1 div{
-            height: 15em;
+            height: 20em;
             margin: 1em;
         }
 
         .incarcator .content div:first-child{
-            width: 70%;
+            width: 60%;
+            height: 20em;
             margin: auto;
             order: 1;
         }
 
         .incarcator .content div:last-child{
-            min-width: 15em;
-            min-height: 15em;
+            width: 40em;
+            height: 20em;
             order: 2;
+            margin: auto;
+            right: 0;
+        }
+
+        .incarcator .content div:last-child img{
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
         }
 
         .incarcator .content p{
-            width: 90%;
+            background-color: #F5F5F5;
+            width: 80%;
+            margin: auto;
             position: relative;
             top: 50%;
             -ms-transform: translateY(-50%);
             transform: translateY(-50%);
         }
 
+        .moreBtn{
+            position: relative;
+            width: 80%;
+            height: 2em;
+            margin: auto;
+            margin-top: 2em;
+        }
+
         .incarcator a{
             position: absolute;
-            right: 0;
-            bottom: 0;
             text-decoration: none;
             color: brown;
+            right: 0;
         }
 
         .paginationCss{
@@ -492,7 +536,11 @@
         }
 
     /* anexe */
-
+        @media only screen and (max-width: 600px) {
+            .destroyPhone {
+                display:none;
+            }
+        }
         .anexe{
             margin-top: 5em;
             width: 100%;
@@ -530,7 +578,6 @@
         .anexaDiv{
             width: 25%;
             height: 25%;
-            background-color: rgba(255,255,255,0.3);
         }
 
         .anexaDiv img{
@@ -538,17 +585,30 @@
             max-height: 100%;
         }
 
+        @media only screen and (max-width: 1200px) {
+            .incarcatoareWrapper{
+                width: 90%;
+            }
+        }
+
         @media only screen and (max-width: 600px) {
             .anexeContainer{
                 display: inline;
                 justify-content: space-around;
                 margin: auto;
+                background-color: darkorange;
             }
+
+            
 
             .anexaDiv{
                 margin: auto;
                 width: 50%;
                 height: 50%;
+            }
+
+            .content1 p{
+                background-color: darkslateblue;
             }
         }
 
@@ -557,8 +617,19 @@
                 height: auto;
             }
 
+            .incarcatoareWrapper{
+                margin: 0;
+                width: 90%;
+                height: 100%;
+                margin: auto;
+            }
+
+            .incarcator h1{
+                height: 2em;
+            }
+
             .incarcatoareSlider{
-                height: 40em;
+                height: 20em;
             }
 
             .incarcator .content{
@@ -569,15 +640,16 @@
             }
 
             .incarcator .content div:first-child{
-                width: 80%;
+                width: 100%;
+                height: 20em;
                 margin: auto;
                 order: 2;
-                height: 20em;
             }
 
             .incarcator .content div:last-child{
                 min-width: 15em;
                 min-height: 15em;
+                height: 20em;
                 background-color: bisque;
                 order: 1;
             }
@@ -587,6 +659,22 @@
                 right: 1em;
                 text-decoration: none;
                 color: brown;
+            }
+
+            .moreBtn{
+                background-color: cornsilk;
+                position: absolute;
+                width: 100%;
+                height: 4em;
+                margin-top: 0em;
+            }
+
+            .incarcator a{
+                position: absolute;
+                text-decoration: none;
+                color: brown;
+                right: 0;
+                top: 0;
             }
         }
 
@@ -703,7 +791,78 @@
             background: none;
             border-bottom: 2px solid rgba(219, 212, 212, 0.631);
         }
+        .contact{
+            position: relative;
+            width: 100%;
+            height: 40em;
+            display: flex;
+            margin-top: 8em;
+        }
 
+        .contact .forms{
+            width: 50%;
+            height: 100%;
+        }
+
+        .contact .write{
+            width: 50%;
+            height: 100%;
+            background-color: rgba(51, 46, 46, 1);
+        }
+
+        .contact .forms h1, .contact .write h1:first-child{
+            color: rgba(255, 253, 253, 0.782);
+            margin: 0.5em;
+        }
+
+        .contact .forms h1, .contact .write h1:last-child{
+            color: rgba(239, 98, 79, 1);
+            margin: 0.5em;
+        }
+
+        .contact .forms h2{
+            margin-left: 1em;
+            margin-top: 1em;
+            text-decoration: none;
+        }
+
+        .contact .forms p{
+            margin-left: 4em;
+            text-decoration: none;
+            font-size: 20;
+        }
+
+        @media only screen and (max-width: 500px) {
+            
+            .contact .forms h2{
+                margin-left: 0.5em;
+                margin-top: 1em;
+                text-decoration: none;
+                font-size: 16;
+            }
+
+            .contact .forms p{
+                margin-left: 1em;
+                text-decoration: none;
+                font-size: 12;
+            }
+
+            .contact .forms a{
+                text-decoration: none;
+                color: rgba(239, 98, 79, 1);
+                font-size: 12;
+            }
+        }
+
+        .contact .forms p:hover .tooltiptext{
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .contact .forms a{
+            text-decoration: none;
+            color: rgba(239, 98, 79, 1);
+        }
         .contact .write .submit{
             position: absolute;
             width: 20%;
@@ -786,6 +945,6 @@
 
     </style>
 
-
+  
 </body>
 </html>

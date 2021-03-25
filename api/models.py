@@ -60,6 +60,10 @@ class Anexa(models.Model):
         return self.name
 
     @property
+    def getPriceEUR(self):
+        return int(float(self.price) / 4.9) + 1
+
+    @property
     def imageURL(self):
         try:
             url = self.thumbnail.url
