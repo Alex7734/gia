@@ -79,12 +79,46 @@
           opacity: 0.7;
         }
 
-        .hide {
-          display: none;
-        }
-
         .myDIV:hover + .hide {
           display: block;
+        }
+
+        .text-anexa{
+          color:white; 
+          font-size: 2em; 
+          font-weight: 700; 
+          text-shadow: 2px 2px 2px 2px;
+        }
+
+        .text-anexa-small{
+          color:white; 
+          font-weight: 600; 
+          text-shadow: 2px 2px 2px 2px;
+        }
+
+        .anexaImagine > small {
+            visibility: hidden;
+        }
+        .anexaImagine:hover > small {
+            visibility: visible;
+        }
+
+
+        .anexaImagine > a {
+            visibility: hidden;
+        }
+        .anexaImagine:hover > a {
+            visibility: visible;
+        }
+
+        .anexaImagine{
+          display: flex;
+          justify-content: center;
+          text-align: center;
+          align-items: center;
+          flex-direction: column;
+          box-shadow: 10px 10px 10px #aaaaaa;
+          transition: 0.5s;
         }
 
     </style>
@@ -111,7 +145,7 @@
                       {{anexa.small_body}}
                     </p>
                     <p>
-                      <a class="btn btn-secondary">Mai multe</a>
+                      <a class="btn btn-secondary" href="{% url 'detail-anexa' anexa.slug %}">Detalii</a>
                     </p>
                   </div>
               </div>
@@ -126,7 +160,9 @@
       {% for anexa in anexe %}
         <div class="anexaSmall">
           <div class="anexaImagine" style="background-image: url('{{anexa.thumbnail.url}}'); background-size: cover;">
-            <p style="text-align: center; color:white; font-size: 2em;" class="hide">{{anexa.name}}</p>
+            <small class="hide text-anexa-small">{{anexa.price}} RON</small>
+            <p class="text-anexa">{{anexa.name}}</p>
+            <a class="btn btn-secondary" href="{% url 'detail-anexa' anexa.slug %}">Detalii</a>
           </div>
         </div>
       {% endfor %}
@@ -136,16 +172,16 @@
 
     <script>
         var swiper = new Swiper('.swiper-container', {
-      pagination: {
-        el: '.swiper-pagination',
-        type: 'fraction',
+          pagination: {
+            el: '.swiper-pagination',
+            type: 'fraction',
 
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
     </script>
 
 </body>

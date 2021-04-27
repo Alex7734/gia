@@ -28,12 +28,24 @@ def produse(request, *args, **kwargs):
     context['produse'] = produse
     return render(request, 'produse.html', context)
 
+def detailProdus(request, pk, *args, **kwargs):
+    context = {}
+    produs = Produs.objects.get(slug=pk)
+    context['item'] = produs 
+    return render(request, 'detail-product.html', context)
+
 def anexe(request, *args, **kwargs):
     context = {}
     anexe =  Anexa.objects.filter(active=True)
     context['page'] = 'anexe'
     context['anexe'] = anexe
     return render(request, 'anexe.html', context)
+
+def detailAnexa(request, pk, *args, **kwargs):
+    context = {}
+    anexa = Anexa.objects.get(slug=pk)
+    context['item'] = anexa
+    return render(request, 'detail-anexa.html', context)
 
 def sendEmail(request):
 

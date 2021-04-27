@@ -78,7 +78,9 @@
 		                	</div>
 		                    <div class="content">
 		                        <div>
-		                            <p>{{produs.small_body}}</p>
+		                            <p> {{produs.small_body}} <br>
+                                        <a class="btn btn-secondary" style="margin-top: 5px;" href="{% url 'detail-product' produs.slug %}">Detalii</a>
+                                    </p>
 		                        </div>
 		                        <div class="imageIncarcator">
 		                            <img src="{{produs.imageURL}}" alt="">
@@ -87,7 +89,6 @@
 		                </div>
 	                {% endif %}
                 {% endfor %}
-                <a href="#">mai mult</a>
             </div>
 
             <div class="swiper-pagination paginationCss"></div>
@@ -95,18 +96,19 @@
     </div>
 
     <div class="anexe">
-        <h1>Anexe</h1>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen</p>
-        <div class="anexeContainer">
-        	{% for anexa in anexe %}
-        		{% if anexa.featured %}
-		            <div class="anexaDiv">
-		            	<h1>{{anexa.name}}</h1>
-		            	<img src="{{anexa.imageURL}}" alt="">
-		            </div>
-            	{% endif %}
+        <h1 style="text-align: center;">Anexe</h1>
+        <p style="margin-left: auto; margin-right: auto; width: 70%; text-align: center;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen</p>
+        <div class="boxContainer">
+            {% for anexa in anexe %}
+              <div class="anexaSmall">
+                <div class="anexaImagine" style="background-image: url('{{anexa.thumbnail.url}}'); background-size: cover;">
+                  <small class="hide text-anexa-small">{{anexa.price}} RON</small>
+                  <p class="text-anexa">{{anexa.name}}</p>
+                  <a class="btn btn-secondary" href="{% url 'detail-anexa' anexa.slug %}">Detalii</a>
+                </div>
+              </div>
             {% endfor %}
-        </div>
+          </div>
     </div>
 
     <div class="contact" id="contact">
@@ -522,13 +524,6 @@
             margin-top: 2em;
         }
 
-        .incarcator a{
-            position: absolute;
-            text-decoration: none;
-            color: brown;
-            right: 0;
-        }
-
         .paginationCss{
             position: absolute;
             margin-right: 15;
@@ -545,17 +540,6 @@
             margin-top: 5em;
             width: 100%;
             height: auto;
-        }
-
-        .anexe h1{
-            text-align: center;
-        }
-
-        .anexe p{
-            text-align: center;
-            width: 70%;
-            margin: auto;
-            margin-top: 2em;
         }
 
         .imageIncarcator{
@@ -941,7 +925,79 @@
         .expandedImg .x:after {
             transform: rotate(-45deg);
         }
+        .boxContainer{
+            width: auto;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-evenly;
+            flex-flow: wrap;
+            margin-bottom: 80px;
+        }
 
+        .boxContainer div{
+            height: 15em;
+            width: 15em;
+            margin: 0.5em;
+          }
+
+        .anexaImagine img{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        
+        .anexaImagine{
+          -webkit-transition: .4s ease-in-out opacity;
+          -moz-transition: .4s ease-in-out opacity;
+          -o-transition: .4s ease-in-out opacity;
+          transition: .4s ease-in-out opacity;
+        }
+
+        .anexaImagine:hover{
+          opacity: 0.7;
+        }
+
+        .myDIV:hover + .hide {
+          display: block;
+        }
+
+        .text-anexa{
+          color:white; 
+          font-size: 2em; 
+          font-weight: 700; 
+          text-shadow: 2px 2px 2px 2px;
+        }
+
+        .text-anexa-small{
+          color:white; 
+          font-weight: 600; 
+          text-shadow: 2px 2px 2px 2px;
+        }
+
+        .anexaImagine > small {
+            visibility: hidden;
+        }
+        .anexaImagine:hover > small {
+            visibility: visible;
+        }
+
+
+        .anexaImagine > a {
+            visibility: hidden;
+        }
+        .anexaImagine:hover > a {
+            visibility: visible;
+        }
+
+        .anexaImagine{
+          display: flex;
+          justify-content: center;
+          text-align: center;
+          align-items: center;
+          flex-direction: column;
+          box-shadow: 10px 10px 10px #aaaaaa;
+          transition: 0.5s;
+        }
 
     </style>
 
